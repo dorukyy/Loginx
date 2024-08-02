@@ -1,0 +1,40 @@
+{
+    "name": "dorukyy/loginx",
+    "type": "package",
+    "description": "Whole login system for Laravel",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^v11.0.0",
+        "laravel/tinker": "^2.9"
+    },
+    "authors": [
+        {
+            "name": "dorukyy",
+            "email": "dorukydemirel@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "dorukyy\\loginx\\": "src/",
+            "dorukyy\\loginx\\database\\seeders\\": "database/seeders/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "dorukyy\\loginx\\LoginxServiceProvider"
+            ]
+        }
+    },
+
+    "scripts": {
+        "post-package-update": [
+            "php artisan vendor:publish --provider=dorukyy\\loginx\\LoginxServiceProvider --force"
+        ],
+        "post-package-install": [
+            "php artisan vendor:publish --provider=dorukyy\\loginx\\LoginxServiceProvider --force"
+        ]
+    },
+    "version": "1.0.0"
+}
