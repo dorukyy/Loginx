@@ -19,9 +19,6 @@ The package will automatically register itself.
 
 - Login
 - Register
-- Forgot Password
-- Reset Password
-- Email Verification
 - Ip Blocking for Login
 - Timeout when failed attempts
 - Auto-block IP address after trying to access different accounts
