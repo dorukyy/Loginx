@@ -15,7 +15,7 @@ class PasswordResetToken extends Model
 {
 
     protected $guarded = [];
-    protected $table = 'password_reset_tokens';
+    protected $table = 'loginx_password_reset_tokens';
     public $timestamps = false;
 
     public function user(): BelongsTo

@@ -122,7 +122,7 @@ class LoginxServiceProvider extends ServiceProvider
             '2024_08_26_100000_create_permissions_table.php',
             '2024_08_26_100000_create_register_requests_table.php',
             '2024_08_26_100000_create_reset_password_requests_table.php',
-            '2024_08_26_100000_create_roles.php',
+            '2024_08_26_100000_create_roles_table.php',
             '2024_08_26_100000_create_settings_table.php',
             '2024_08_26_100000_create_timeouts_table.php',
             '2024_08_26_100000_create_timezones_table.php',

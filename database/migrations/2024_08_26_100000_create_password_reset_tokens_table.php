@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
+        Schema::create('loginx_password_reset_tokens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->string('email');
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('loginx_password_reset_tokens');
 
     }
 };
