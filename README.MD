@@ -48,8 +48,8 @@ Almost everything in the package can be editable from database. You can change t
 - "PASSWORD_REQ_NUMBER" : If the password requires a number.
 - "PASSWORD_REQ_SPECIAL" : If the password requires a special character.
 - "PASSWORD_REQ_UPPER_CASE" : If the password requires an uppercase letter.
-- "TIMEOUT_ACCOUNT_AFTER_X_TRY" : The number of failed login attempts before the timeout.
-- "TIMEOUT_ACCOUNT_IN_X_SECS" : The duration of the timeout in seconds.
+- "TIMEOUT_AFTER_X_TRY" : The number of failed login attempts before the timeout.
+- "TIMEOUT_IN_X_SECS" : The duration within which the user can fail to log in x times.
 - "TIMEOUT_DURATION" : The duration of the timeout in seconds. // Default  900 = 5 minutes
 
 

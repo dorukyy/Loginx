@@ -14,6 +14,4 @@ class RegisterRequest extends Model
     protected $table = 'loginx_register_requests';
 
 
-
-
 }

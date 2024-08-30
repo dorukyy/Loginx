@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ip');
             $table->string('email');
-            $table->string('username');
+            $table->string('username')->nullable();
             $table->boolean('is_failed');
             $table->timestamps();
 

@@ -13,3 +13,12 @@
 - Added IpBlock feature.
 - Added Timeout feature.
 - Added login with username, email and phone number feature.
+
+## [1.5] - 2024-08-30
+### Added
+- Forgot password feature.
+- Reset password feature.
+- Mail activation feature.
+- Timezones
+- DateTime formats
+- Countries
