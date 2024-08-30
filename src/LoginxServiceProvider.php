@@ -99,7 +99,7 @@ class LoginxServiceProvider extends ServiceProvider
 
     }
 
-    public function createLoginxTables(): void
+     public function createLoginxTables(): void
     {
         // If Settings table is not created
         if (!Schema::hasTable('loginx_settings')) {
@@ -111,9 +111,31 @@ class LoginxServiceProvider extends ServiceProvider
         if (Schema::hasTable('loginx_settings') && DB::table('loginx_settings')->count() == 0) {
             Artisan::call('db:seed', ['--class' => LoginxSeeder::class]);
         }
-        Artisan::call('migrate', [
-            '--path' => 'vendor/dorukyy/loginx/database/migrations/2024_08_26_100000_create_password_reset_tokens_table.php'
-        ]);
+        $migrations = [
+            '2024_08_26_100000_create_blocked_ips_table.php',
+            '2024_08_26_100000_create_blocked_mail_providers_table.php',
+            '2024_08_26_100000_create_countries_table.php',
+            '2024_08_26_100000_create_failed_logins_table.php',
+            '2024_08_26_100000_create_logins_table.php',
+            '2024_08_26_100000_create_mail_activation_tokens_table.php',
+            '2024_08_26_100000_create_password_reset_tokens_table.php',
+            '2024_08_26_100000_create_permissions_table.php',
+            '2024_08_26_100000_create_register_requests_table.php',
+            '2024_08_26_100000_create_reset_password_requests_table.php',
+            '2024_08_26_100000_create_roles.php',
+            '2024_08_26_100000_create_settings_table.php',
+            '2024_08_26_100000_create_timeouts_table.php',
+            '2024_08_26_100000_create_timezones_table.php',
+            '2024_08_26_100000_create_users_permissions_table.php',
+            '2024_08_26_100000_create_users_roles_table.php',
+        ];
+
+        foreach ($migrations as $migration) {
+            if (!Schema::hasTable($migration)) {
+                Artisan::call('migrate',
+                    ['--path' => 'vendor/dorukyy/loginx/database/migrations/'.$migration]);
+            }
+        }
 
     }
 
