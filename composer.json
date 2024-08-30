@@ -40,7 +40,7 @@
             "php artisan vendor:publish --provider=dorukyy\\loginx\\LoginxServiceProvider --force"
         ]
     },
-    "version": "1.0.0",
+    "version": "1.5",
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
