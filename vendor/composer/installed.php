@@ -1,10 +1,10 @@
 <?php return array(
     'root' => array(
         'name' => 'dorukyy/loginx',
-        'pretty_version' => '1.5',
-        'version' => '1.5.0.0',
-        'reference' => null,
-        'type' => 'package',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '35447bc6f7c0e66cbdcf3304e6f1f3c4faf07774',
+        'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
@@ -56,10 +56,10 @@
             'dev_requirement' => false,
         ),
         'dorukyy/loginx' => array(
-            'pretty_version' => '1.5',
-            'version' => '1.5.0.0',
-            'reference' => null,
-            'type' => 'package',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '35447bc6f7c0e66cbdcf3304e6f1f3c4faf07774',
+            'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
@@ -514,8 +514,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

@@ -4,8 +4,6 @@
     "description": "A new authentication system for Laravel",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "laravel/framework": "^v10.10.0",
         "laravel/tinker": "^2.9"
     },
     "authors": [
@@ -36,11 +34,6 @@
             "php artisan vendor:publish --provider=dorukyy\\loginx\\LoginxServiceProvider --force"
         ]
     },
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability": "dev"
+
 }
