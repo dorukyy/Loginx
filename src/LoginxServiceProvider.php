@@ -111,6 +111,9 @@ class LoginxServiceProvider extends ServiceProvider
         if (Schema::hasTable('loginx_settings') && DB::table('loginx_settings')->count() == 0) {
             Artisan::call('db:seed', ['--class' => LoginxSeeder::class]);
         }
+        Artisan::call('migrate', [
+            '--path' => 'vendor/dorukyy/loginx/database/migrations/2024_08_26_100000_create_password_reset_tokens_table.php'
+        ]);
 
     }
 

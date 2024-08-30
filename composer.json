@@ -41,7 +41,6 @@
             "pestphp/pest-plugin": true
         }
     },
-    "version": "1.5",
     "minimum-stability": "stable",
     "prefer-stable": true
 }
