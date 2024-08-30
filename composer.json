@@ -1,16 +1,12 @@
 {
     "name": "dorukyy/loginx",
-    "type": "package",
+    "type": "library",
     "description": "Whole login system for Laravel",
     "license": "MIT",
     "require": {
         "php": "^8.0",
         "laravel/framework": "^v10.10.0",
         "laravel/tinker": "^2.9"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "orchestra/testbench": "*"
     },
     "authors": [
         {
@@ -40,12 +36,12 @@
             "php artisan vendor:publish --provider=dorukyy\\loginx\\LoginxServiceProvider --force"
         ]
     },
-    "version": "1.5",
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
     },
+    "version": "1.5",
     "minimum-stability": "dev",
     "prefer-stable": true
 }
