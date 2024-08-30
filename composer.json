@@ -1,7 +1,7 @@
 {
     "name": "dorukyy/loginx",
     "type": "library",
-    "description": "Whole login system for Laravel",
+    "description": "A new authentication system for Laravel",
     "license": "MIT",
     "require": {
         "php": "^8.0",
@@ -41,6 +41,6 @@
             "pestphp/pest-plugin": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

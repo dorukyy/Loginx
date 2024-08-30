@@ -57,6 +57,15 @@ class LoginxServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        //If any of the migrations exist in the project have 'password_resets' table, delete it
+        $migrations = collect($filesystem->files(database_path('migrations')))->filter(function ($file) {
+            return str_contains($file->getFilename(), 'password_resets');
+        });
+
+        foreach ($migrations as $migration) {
+            $filesystem->delete($migration);
+        }
+
         //run the migrations
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('migrations'),
