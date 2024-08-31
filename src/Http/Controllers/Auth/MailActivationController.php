@@ -41,7 +41,7 @@ class MailActivationController extends Controller
                     }
 
                 }
-                $user->sendEmailVerification();
+                $user->sendEmailVerificationMail();
                 return redirect()->route('login.login')->with('success', config('loginx.messages.activationMailSent'));
             }
         }

@@ -42,7 +42,20 @@ class LoginxServiceProvider extends ServiceProvider
 
         $this->handleUserModelAndMigration($filesystem);
         //move controllers to app/Http/Controllers
-        $filesystem->copyDirectory(__DIR__.'/Http/Controllers', app_path('Http/Controllers/Auth'));
+        $filesystem->copyDirectory(__DIR__.'/Http/Controllers', app_path('Http/Controllers'));
+
+        //create base controller if not exist
+        if (!$filesystem->exists(app_path('Http/Controllers/Controller.php'))) {
+            $filesystem->copy(__DIR__.'/Http/Controllers/Controller.php', app_path('Http/Controllers/Controller.php'));
+        }
+
+        //Controller.php dışındaki tüm controllerları /auth a taşı
+        $controllers = collect($filesystem->files(app_path('Http/Controllers')))->filter(function ($file) {
+            return !str_contains($file->getFilename(), 'Controller.php');
+        });
+
+
+
 
 
         // Merge package configuration

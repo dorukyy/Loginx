@@ -104,7 +104,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'loginx_users_roles', 'user_id', 'role_id');
     }
 
-    public function sendEmailVerification(): void
+    public function sendEmailVerificationMail(): void
     {
         //get the token
         $mailToken = MailActivationToken::where('user_id', $this->id)->first();

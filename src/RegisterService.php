@@ -83,7 +83,7 @@ class RegisterService
 
     private function sendEmailVerification(User $user): void
     {
-        $user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationMail();
     }
 
     /*

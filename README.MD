@@ -9,7 +9,7 @@ This is a simple login system that uses a database to store user information for
 You can install the package via composer:
 
 ```bash
-composer require dorukyy/loginx
+composer require dorukyy/loginx:dev-main
 ```
 
 The package will automatically register itself.
