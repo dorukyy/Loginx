@@ -30,6 +30,20 @@ You can change the configuration of the package by publishing the configuration 
 php artisan vendor:publish --provider="dorukyy\loginx\LoginxServiceProvider"
 ```
 
+Add traits to your User model.
+
+```php
+use dorukyy\loginx\Traits\LoginxUser;
+use dorukyy\loginx\Models\LoginxUser as LoginxUserModel;
+
+
+class User extends Authenticatable
+{
+    use LoginxReferral,Loginx;
+
+}
+```
+
 Almost everything in the package can be editable from database. You can change the configuration of the package by changing the values in the configuration file.
 
 # Usage
