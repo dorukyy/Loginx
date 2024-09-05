@@ -31,18 +31,6 @@ class LoginxServiceProvider extends ServiceProvider
         $this->setControllers($filesystem);
 
 
-        // Merge package configuration
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'loginx'
-        );
-    }
-
-    /**
-     * @throws FileNotFoundException
-     */
-    public function boot(Filesystem $filesystem): void
-    {
-
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->getMigrationsConflictsAndDelete($filesystem);
@@ -57,6 +45,11 @@ class LoginxServiceProvider extends ServiceProvider
 
         $this->addLoginxSeederToGlobalSeeder($filesystem);
 
+
+        // Merge package configuration
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config.php', 'loginx'
+        );
     }
 
     public function createLoginxTables(): void
