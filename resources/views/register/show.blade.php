@@ -6,7 +6,7 @@
     @if($errors->get('loginx') !== null)
             @foreach ($errors->get('loginx') as $error)
                 <div class="alert">
-                    {{ $error }}
+                    {!! $error !!}
                 </div>
             @endforeach
         @endif

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\HtmlString;
+
 return [
     //Login
     "loginSuccess" => "Login Successful",
@@ -24,6 +26,8 @@ return [
     "mailProviderBlocked" => "Mail provider is blocked. Please try with another email provider.",
 
     //Forgot Password
+    "emailNotFound" => "This email is not found.",
+    "invalidToken" => "This token is invalid.",
     "forgotPasswordMailSent" => "Password reset link sent!",
     "emailOrTokenIsNotFound" => "This email or token is not found.",
     "tokenIsInvalid" => "This token is invalid.",
@@ -41,7 +45,7 @@ return [
     "activationMailSent" => "Activation mail sent. Please check your email.",
     "activationMailAlreadySent" => "Activation mail already sent. Please check your email. If you didn't receive it, you can resend it after 3 minutes.",
     "accountActivated" => "Your account is activated. You can login now.",
-    "userNotActivated" => "Your account is not activated. Please check your email for activation.",
+    "userNotActivated" => new HtmlString("Your account is not activated. Please check your email for activation mail or click the button below to resend it.<br><a href='/activation/resend'>Resend Activation Mail</a>"),
 
 ];
 

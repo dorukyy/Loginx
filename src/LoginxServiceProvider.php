@@ -3,10 +3,8 @@
 namespace dorukyy\loginx;
 
 use dorukyy\loginx\database\seeders\LoginxSeeder;
-use dorukyy\loginx\Models\Setting;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -26,102 +24,42 @@ class LoginxServiceProvider extends ServiceProvider
             return new LoginxFacade;
         });
 
-
         $filesystem = $this->app->make(Filesystem::class);
 
-        $authFilePath = base_path('routes/auth.php');
-        $webFilePath = base_path('routes/web.php');
-        $requireStatement = "\nrequire base_path('routes/auth.php');";
-
-        $filesystem->put($authFilePath, $filesystem->get(__DIR__.'/../routes/web.php'));
-
-        // Append the import statement for auth.php to the project's routes/web.php if it doesn't already exist
-        if (!str_contains($filesystem->get($webFilePath), $requireStatement)) {
-            $filesystem->append($webFilePath, $requireStatement);
-        }
-
-        $this->handleUserModelAndMigration($filesystem);
+//        $this->handleUserModelAndMigration($filesystem);
         //move controllers to app/Http/Controllers
-        $filesystem->copyDirectory(__DIR__.'/Http/Controllers', app_path('Http/Controllers'));
-
-        //create base controller if not exist
-        if (!$filesystem->exists(app_path('Http/Controllers/Controller.php'))) {
-            $filesystem->copy(__DIR__.'/Http/Controllers/Controller.php', app_path('Http/Controllers/Controller.php'));
-        }
-
-        //Controller.php dışındaki tüm controllerları /auth a taşı
-        $controllers = collect($filesystem->files(app_path('Http/Controllers')))->filter(function ($file) {
-            return !str_contains($file->getFilename(), 'Controller.php');
-        });
-
-
-
+        $this->setControllers($filesystem);
 
 
         // Merge package configuration
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'loginx'
         );
-
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     public function boot(Filesystem $filesystem): void
     {
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        //If any of the migrations exist in the project have 'password_resets' table, delete it
-        $migrations = collect($filesystem->files(database_path('migrations')))->filter(function ($file) {
-            return str_contains($file->getFilename(), 'password_resets');
-        });
+        $this->getMigrationsConflictsAndDelete($filesystem);
 
-        foreach ($migrations as $migration) {
-            $filesystem->delete($migration);
-        }
-
-        //run the migrations
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'migrations');
-
-
-        // Publish the controllers
-        $this->publishes([
-            __DIR__.'/Http/Controllers' => app_path('Http/Controllers'),
-        ], 'loginx-controllers');
-
-        // Publish the seeders
-        $this->publishes([
-            __DIR__.'/../database/seeders' => database_path('seeders'),
-        ], 'seeders');
-
-
-        // Publish the seeders
-        $this->publishes([
-            __DIR__.'/../database/seeders/LoginxSeeder.php' => database_path('seeders/LoginxSeeder.php'),
-        ], 'seeders');
+        $this->publishAll();
 
         // Load Views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'loginx');
 
-        // Publish the views
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/loginx'),
-        ], 'loginx-views');
-
-        //publish css
-        $this->publishes([
-            __DIR__.'/../resources/css' => public_path('css'),
-        ], 'loginx-css');
-
-        //get all settings from consts.php and create if they are not exist
+        //Get the settings from the consts.php file and save them to the database
         $this->createLoginxTables();
 
         $this->addLoginxSeederToGlobalSeeder($filesystem);
 
     }
 
-     public function createLoginxTables(): void
+    public function createLoginxTables(): void
     {
         // If Settings table is not created
         if (!Schema::hasTable('loginx_settings')) {
@@ -176,7 +114,9 @@ class LoginxServiceProvider extends ServiceProvider
         $filesystem->copyDirectory(__DIR__.'/database/factories_to_move', database_path('factories'));
     }
 
-    // Add the LoginxSeeder to the DatabaseSeeder without using str_replace
+    /**
+     * @throws FileNotFoundException
+     */
     public function addLoginxSeederToGlobalSeeder(Filesystem $filesystem): void
     {
         $globalSeeder = database_path('seeders/DatabaseSeeder.php');
@@ -189,7 +129,7 @@ class LoginxServiceProvider extends ServiceProvider
             // Find the position of the first '{' after 'public function run()'
             $position = strpos($content, '{', strpos($content, 'public function run()'));
             if ($position !== false) {
-                // Insert the code after the '{' character, followed by a blank line
+                // Insert the code
                 $content = substr($content, 0, $position + 1).PHP_EOL.PHP_EOL.$code.substr($content, $position + 1);
             }
         }
@@ -211,4 +151,81 @@ class LoginxServiceProvider extends ServiceProvider
         $filesystem->put($globalSeeder, $content);
     }
 
+    public function getMigrationsConflictsAndDelete(Filesystem $filesystem): void
+    {
+        $migrationNames = [
+            'create_users_table',
+            'create_password_reset_tokens_table',
+            'create_mail_activation_tokens_table',
+            'create_blocked_ips_table',
+            'create_blocked_mail_providers_table',
+            'create_countries_table',
+            'create_failed_logins_table',
+            'create_logins_table',
+        ];
+
+        foreach ($migrationNames as $migrationName) {
+            if (collect($filesystem->files(database_path('migrations')))->contains('create_'.$migrationName.'.php')) {
+                $fullName = collect($filesystem->files(database_path('migrations')))->where('name',
+                    'create_'.$migrationName.'.php')->first();
+                $filesystem->delete($fullName);
+            }
+        }
+    }
+
+    /**
+     * @throws FileNotFoundException
+     */
+    public function setControllers(Filesystem $filesystem): void
+    {
+        //if controller.php exists in app/Http/Controllers, delete it
+        if ($filesystem->exists(app_path('Http/Controllers/Controller.php'))) {
+            $filesystem->delete(app_path('Http/Controllers/Controller.php'));
+        }
+        $filesystem->copyDirectory(__DIR__.'/Http/Controllers', app_path('Http/Controllers'));
+
+        $requireStatement = "\nrequire base_path('routes/auth.php');";
+
+        $filesystem->put(base_path('routes/auth.php'), $filesystem->get(__DIR__.'/../routes/web.php'));
+
+        // Append the import statement for auth.php to the project's routes/web.php if it doesn't already exist
+        if (!str_contains($filesystem->get(base_path('routes/web.php')), $requireStatement)) {
+            $filesystem->append(base_path('routes/web.php'), $requireStatement);
+        }
+
+    }
+
+    private function publishAll(): void
+    {
+        //Publish migrations
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'migrations');
+
+        // Publish the controllers
+        $this->publishes([
+            __DIR__.'/Http/Controllers' => app_path('Http/Controllers'),
+        ], 'loginx-controllers');
+
+        // Publish the views
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/loginx'),
+        ], 'loginx-views');
+
+        //publish css
+        $this->publishes([
+            __DIR__.'/../resources/css' => public_path('css'),
+        ], 'loginx-css');
+
+        // Publish the seeders
+        $this->publishes([
+            __DIR__.'/../database/seeders' => database_path('seeders'),
+        ], 'seeders');
+
+
+        // Publish the LoginxSeeder
+        $this->publishes([
+            __DIR__.'/../database/seeders/LoginxSeeder.php' => database_path('seeders/LoginxSeeder.php'),
+        ], 'seeders');
+    }
 }

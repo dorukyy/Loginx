@@ -19,7 +19,7 @@ class LoginxSeeder extends Seeder
     {
         $this->seedSettings();
         $this->seedBlockedMailProviders();
-        $this->seedTimeZones();
+//        $this->seedTimeZones();
         $this->seedCountries();
     }
 

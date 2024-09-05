@@ -44,7 +44,7 @@ class ForgotPasswordController extends Controller
             return redirect()->route('login.login-page')->withErrors(['token' => 'This token is invalid.']);
         }
 
-        return view('loginx::forgot-password.new-pass', ['token' => $token, 'email' => $email]);
+        return view('loginx::forgot-password.new-pass', ['token' => $token, 'email' => $email])->with('success', 'You can change your password now.');
 
     }
 
