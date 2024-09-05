@@ -26,30 +26,30 @@ class LoginxServiceProvider extends ServiceProvider
 
         $filesystem = $this->app->make(Filesystem::class);
 
-//        $this->handleUserModelAndMigration($filesystem);
+
         //move controllers to app/Http/Controllers
         $this->setControllers($filesystem);
 
-
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-        $this->getMigrationsConflictsAndDelete($filesystem);
-
-        $this->publishAll();
 
         // Load Views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'loginx');
-
-        //Get the settings from the consts.php file and save them to the database
-        $this->createLoginxTables();
-
-        $this->addLoginxSeederToGlobalSeeder($filesystem);
 
 
         // Merge package configuration
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'loginx'
         );
+    }
+
+    //create a command to set the package up
+    public function boot(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                LoginxSetupCommand::class,
+            ]);
+        }
     }
 
     public function createLoginxTables(): void
@@ -90,21 +90,6 @@ class LoginxServiceProvider extends ServiceProvider
             }
         }
 
-    }
-
-    private function handleUserModelAndMigration(Filesystem $filesystem): void
-    {
-        $filesystem->copy(__DIR__.'/Models/User.php', app_path('Models/User.php'));
-        //find the user migration of the project
-        $userMigration = collect($filesystem->files(database_path('migrations')))->filter(function ($file) {
-            return str_contains($file->getFilename(), 'create_users_table');
-        })->first();
-        //overwrite the user migration
-        $filesystem->copy(__DIR__.'/../database/migrations_to_move/2024_08_26_100000_create_users_table.php',
-            $userMigration);
-
-        //move factories to database/factories
-        $filesystem->copyDirectory(__DIR__.'/database/factories_to_move', database_path('factories'));
     }
 
     /**
@@ -188,7 +173,7 @@ class LoginxServiceProvider extends ServiceProvider
 
     }
 
-    private function publishAll(): void
+    public function publishAll(): void
     {
         //Publish migrations
         $this->publishes([
