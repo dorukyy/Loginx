@@ -28,7 +28,7 @@ class LoginxSetupCommand extends Command
 
             $serviceProvider->getMigrationsConflictsAndDelete($filesystem);
             $this->info('Migration conflicts resolved.');
-            
+
             $serviceProvider->publishAll();
             $this->info('All resources published successfully.');
 

@@ -27,9 +27,6 @@ class LoginxServiceProvider extends ServiceProvider
         $filesystem = $this->app->make(Filesystem::class);
 
 
-        //move controllers to app/Http/Controllers
-        $this->setControllers($filesystem);
-
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Load Views
