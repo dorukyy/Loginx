@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('loginx_timeouts', function (Blueprint $table) {
             $table->string('user_id')->nullable();
-            $table->string('ip');
+            $table->string('ip')->index();
             $table->dateTime('unblocked_at');
             $table->timestamps();
         });

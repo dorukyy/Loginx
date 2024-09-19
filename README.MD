@@ -1,3 +1,16 @@
+
+![GitHub last commit](https://img.shields.io/github/last-commit/dorukyy/loginx)
+![GitHub Release](https://img.shields.io/github/v/release/dorukyy/loginx)
+![Packagist Downloads](https://img.shields.io/packagist/dt/dorukyy/loginx)
+![GitHub issues](https://img.shields.io/github/issues/dorukyy/loginx)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/dorukyy/loginx)
+
+![Laravel](https://img.shields.io/badge/Laravel-8.x-orange)
+![PHP](https://img.shields.io/badge/PHP-7.3%2B-blue)
+![GitHub](https://img.shields.io/github/license/dorukyy/loginx)
+
+packagist: [dorukyy/loginx](https://packagist.org/packages/dorukyy/loginx)
+
 # Introduction
 This is a simple login system that uses a database to store user information for laravel. Everything needed for a login system is included in this package. You can use this package to create an Authentication system for your project. This package is not suitable for use in large projects. It is a simple package that can be used in small projects. If you want to use it in a large project, you can develop it further.
 
@@ -17,11 +30,17 @@ The package will automatically register itself.
 
 # Features
 
-- Login
+- Login /w Email, Username or Phone
 - Register
-- Ip Blocking for Login
+- Ip Blocking
 - Timeout when failed attempts
 - Auto-block IP address after trying to access different accounts
+- Password requirements
+- User blockable
+- User referral system
+- Recaptcha
+- User roles
+- User permissions
 
 # Configuration
 You can change the configuration of the package by publishing the configuration file.
@@ -30,12 +49,19 @@ You can change the configuration of the package by publishing the configuration 
 php artisan vendor:publish --provider="dorukyy\loginx\LoginxServiceProvider"
 ```
 
+
 Add traits to your User model.
 
 ```php
 use dorukyy\loginx\Traits\LoginxUser;
 use dorukyy\loginx\Models\LoginxUser as LoginxUserModel;
 
+
+run the following command
+
+```bash
+php artisan loginx:setup
+```
 
 class User extends Authenticatable
 {

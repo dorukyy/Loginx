@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use dorukyy\loginx\Http\Requests\LoginRequest;
 use dorukyy\loginx\LoginxFacade;
 use dorukyy\loginx\SettingsFacade;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 
 
 class LoginController extends Controller
@@ -39,17 +40,23 @@ class LoginController extends Controller
             return redirect()->route('home')->with('success', $data['message']);
         } else {
             $view = view('loginx::login.show', ['data' => $loginSettings])
-            ->withErrors(['loginx' => $data['message']]);
+                ->withErrors(['loginx' => $data['message']]);
 
-        return response($view->render(), Response::HTTP_UNPROCESSABLE_ENTITY);
+            return response($view->render(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
-        auth()->logout();
-        return redirect()->route('home');
+        if (auth()->check()) {
+        LoginxFacade::logout();
+        return redirect()->route('login.login-page')->with('success', 'You have been logged out successfully');
+        } else {
+            return redirect()->route('login.login-page')->withErrors(['loginx' => 'You are not logged in']);
+        }
+
+
     }
 
 }

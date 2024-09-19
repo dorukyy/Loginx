@@ -13,12 +13,13 @@
         @endif
         @include('loginx::login._form')
 
-        <div class="register-link">
-            <span>@lang('New on our platform?')</span>
-            <a href="{{route('register.register-page')}}">@lang('Create an account')</a>
-        </div>
 
+
+    <div id="g_id_onload"
+         data-client_id="1039930373728-d01b4su84vmrgh0j4e0lpr4e6p1hquq5.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
     </div>
+    <div class="g_id_signin" data-type="standard"></div>
 
 @endsection
 

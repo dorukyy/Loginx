@@ -8,6 +8,7 @@ class Roles
     const ADMIN = 2;
     const MODERATOR = 3;
     const USER = 4;
+    const GUEST = 5;
 
     public static function data(): array
     {
@@ -15,7 +16,8 @@ class Roles
             self::SUPER_ADMIN => 1,
             self::ADMIN => 2,
             self::MODERATOR => 3,
-            self::USER => 4
+            self::USER => 4,
+            self::GUEST => 5,
         ];
     }
 

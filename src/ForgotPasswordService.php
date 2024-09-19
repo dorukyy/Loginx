@@ -4,8 +4,9 @@ namespace dorukyy\loginx;
 
 use App\Models\User;
 use dorukyy\loginx\Http\Requests\ForgotPasswordRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
+use stdClass;
 
 class ForgotPasswordService
 {
@@ -18,7 +19,7 @@ class ForgotPasswordService
         $this->user = User::where('email', $this->request->email)?->first() ?? null;
     }
 
-    public function sendMail(): \Illuminate\Http\RedirectResponse
+    public function sendMail(): RedirectResponse
     {
         if ($this->user == null) {
             return back()->withErrors(['email' => 'This email is not found.']);
@@ -38,7 +39,7 @@ class ForgotPasswordService
 
         $user = $this->user;
 
-        $message = new \stdClass(); // Added variable declaration
+        $message = new stdClass();
         Mail::send('loginx::forgot-password.mail', ['url' => $url], function ($message) use ($user) {
             $message->to($user->email);
             $message->subject('Password Reset Request');

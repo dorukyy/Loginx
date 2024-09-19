@@ -11,7 +11,6 @@ After installing the package, you can publish the configuration file using the f
 php artisan vendor:publish --provider="Dorukyy\Loginx\LoginxServiceProvider"
 ```
 
-Publish Css
-```bash
-php artisan vendor:publish --tag=loginx-css --force
-```
+You can add the `LoginxUser` trait to your User model to use the package's features:
+
+

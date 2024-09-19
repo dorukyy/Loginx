@@ -1,4 +1,5 @@
 <?php
+
 namespace dorukyy\loginx\Models;
 
 
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
 
-  protected $guarded = [];
-  protected $table = 'loginx_countries';
     public $timestamps = false;
+    protected $guarded = [];
+    protected $table = 'loginx_countries';
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('found_type');
             $table->string('user_input');
-            $table->string('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
         });
 

@@ -13,7 +13,6 @@ use Illuminate\Support\Str;
 
 trait Loginx
 {
-
     public function isBlocked(): bool
     {
         if ($this->blocked_at) {

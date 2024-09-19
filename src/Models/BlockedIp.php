@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlockedIp extends Model
 {
 
-  protected $guarded = [];
-  protected $table = 'loginx_blocked_ips';
+    protected $guarded = [];
+    protected $table = 'loginx_blocked_ips';
+
 }

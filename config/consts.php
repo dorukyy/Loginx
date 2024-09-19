@@ -9,6 +9,14 @@ return [
     "LOGIN_WITH_EMAIL" => true,
     "LOGIN_WITH_PHONE" => false,
 
+    //Social Login Settings
+    "LOGIN_WITH_GOOGLE" => false,
+    "GOOGLE_CLIENT_ID" => "",
+    "LOGIN_WITH_FACEBOOK" => false,
+    "LOGIN_WITH_TWITTER" => false,
+    "LOGIN_WITH_DISCORD" => false,
+    "LOGIN_WITH_APPLE" => false,
+
     //Register Settings
     "IS_MAIL_ACTIVATION" => true,
     "SHOW_USERNAME_ON_REGISTER" => true,

@@ -12,7 +12,12 @@
 
     <title>@yield('title') {{ $title ?? config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+<meta name="referrer" content="no-referrer">
+
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}"/>
+
+
 
 
 <link rel="stylesheet" href="{{ asset('css/loginx-style.css') }}"/><body>

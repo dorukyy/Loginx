@@ -9,10 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Setting extends Model
 {
-    protected $guarded = [];
     protected $table = 'loginx_settings';
-
-
-
+    public $incrementing = false;
+    protected $primaryKey = 'key';
+    public $timestamps = false;
 
 }

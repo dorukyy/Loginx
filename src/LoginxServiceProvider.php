@@ -2,6 +2,9 @@
 
 namespace dorukyy\loginx;
 
+use dorukyy\loginx\Console\Commands\BlockIp;
+use dorukyy\loginx\Console\Commands\Setting;
+use dorukyy\loginx\Console\Commands\Setup;
 use dorukyy\loginx\database\seeders\LoginxSeeder;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -44,7 +47,9 @@ class LoginxServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                LoginxSetupCommand::class,
+                Setup::class,
+                BlockIp::class,
+                Setting::class,
             ]);
         }
     }

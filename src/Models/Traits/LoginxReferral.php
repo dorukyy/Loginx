@@ -36,8 +36,4 @@ trait LoginxReferral
         return $this->referrals()->count();
     }
 
-
-
-
-
 }

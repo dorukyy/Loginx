@@ -1,11 +1,12 @@
 <?php
 
-namespace dorukyy\loginx;
+namespace dorukyy\loginx\Console\Commands;
 
+use dorukyy\loginx\LoginxServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class LoginxSetupCommand extends Command
+class Setup extends Command
 {
     protected $signature = 'loginx:setup';
     protected $description = 'Setup the Loginx package';

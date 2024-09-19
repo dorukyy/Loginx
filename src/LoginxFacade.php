@@ -273,4 +273,9 @@ class LoginxFacade extends Facade
             ->first()?->blocked_until;
     }
 
+    public static function logout()
+    {
+        auth()->logout();
+    }
+
 }

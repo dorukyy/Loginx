@@ -1,23 +1,26 @@
 <?php
-namespace dorukyy\loginx\Models;
 
+namespace dorukyy\loginx\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static create(array $array)
- * This is the model for user failed logins.
+ * This is the model for user API keys.
  */
-class FailedLogin extends Model
+class ApiKey extends Model
 {
+    use SoftDeletes;
 
-  protected $guarded = [];
-  protected $table = 'loginx_failed_logins';
+    protected $table = 'loginx_api_keys';
+    protected $fillable = ['user_id', 'api_key', 'is_active'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
 }

@@ -2,8 +2,6 @@
 
 namespace dorukyy\loginx\Models\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait UserDetails
 {
     public function addDetailsFields(): void
@@ -27,7 +25,12 @@ trait UserDetails
 
     public function getFullNameAttribute(): string
     {
-        return $this->name . ' ' . $this->surname;
+        return $this->name.' '.$this->surname;
+    }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        return $this->avatar ? asset('storage/'.$this->avatar) : asset('images/default-avatar.png');
     }
 
 

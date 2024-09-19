@@ -13,7 +13,7 @@ Route::controller(LoginController::class)
     ->group(function () {
         Route::get('login', 'loginPage')->name('login-page')->middleware('guest');
         Route::post('login', 'login')->name('login')->middleware('guest');
-        Route::get('logout', 'logout')->name('logout')->middleware('auth');
+        Route::get('logout', 'logout')->name('logout');
 
     });
 

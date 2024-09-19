@@ -171,12 +171,12 @@ class SettingsFacade extends Facade
         ];
     }
 
-    public static function set(string $key, $value)
+    public static function set(string $key, $value): void
     {
         $setting = Setting::where('key', $key)->first();
-        if($setting){
-            $setting->update(['value' => $value]);
-        }
+
+        $setting['value'] = $value;
+        $setting->save();
     }
 
     public static function getActivationViewData(): array

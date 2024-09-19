@@ -124,7 +124,7 @@ class LoginService
         if (!SettingsFacade::getIsTimeoutEnabled()) {
             return false;
         }
-        $failedLogins = FailedLogin::where('user_id', $this->user->id)
+        $failedLogins = FailedLogin::where('user_id', $this->user?->id)
             ->where('created_at', '>=', now()->subSeconds(SettingsFacade::getTimeOutInSecs()))
             ->get();
         if ($failedLogins->count() >= SettingsFacade::getTimeOutAfterAttemptCount()) {
