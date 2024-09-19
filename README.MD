@@ -55,7 +55,7 @@ Add traits to your User model.
 ```php
 use dorukyy\loginx\Traits\LoginxUser;
 use dorukyy\loginx\Models\LoginxUser as LoginxUserModel;
-
+```
 
 run the following command
 
