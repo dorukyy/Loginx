@@ -55,19 +55,20 @@ Add traits to your User model.
 ```php
 use dorukyy\loginx\Traits\LoginxUser;
 use dorukyy\loginx\Models\LoginxUser as LoginxUserModel;
-```
 
-run the following command
-
-```bash
-php artisan loginx:setup
-```
 
 class User extends Authenticatable
 {
     use LoginxReferral,Loginx;
 
 }
+
+```
+
+run the following command
+
+```bash
+php artisan loginx:setup
 ```
 
 Almost everything in the package can be editable from database. You can change the configuration of the package by changing the values in the configuration file.
