@@ -3,6 +3,7 @@
 namespace dorukyy\loginx\Models\Traits;
 
 use dorukyy\loginx\Models\MailActivationToken;
+use dorukyy\loginx\Models\Notification;
 use dorukyy\loginx\Models\PasswordResetToken;
 use dorukyy\loginx\Models\Timeout;
 use dorukyy\loginx\SettingsFacade;
@@ -114,7 +115,8 @@ trait Loginx
 
     }
 
-    public function notifications(){
+    public function notifications(): HasMany
+    {
         return $this->hasMany(Notification::class);
     }
 
