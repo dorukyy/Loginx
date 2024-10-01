@@ -21,11 +21,11 @@
 
     <div class="login-link">
         <span>@lang('Already have an account?')</span>
-        <a href="{{route('login.login-page')}}">@lang('Login')</a>
+        <a href="{{route('login')}}">@lang('Login')</a>
     </div>
     <div class="login-link">
         <span>@lang('New on our platform?')</span>
-        <a href="{{route('register.register-page')}}">@lang('Create an account')</a>
+        <a href="{{route('register')}}">@lang('Create an account')</a>
     </div>
 
 

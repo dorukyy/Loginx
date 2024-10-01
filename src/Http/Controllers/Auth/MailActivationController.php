@@ -42,7 +42,7 @@ class MailActivationController extends Controller
 
                 }
                 $user->sendEmailVerificationMail();
-                return redirect()->route('login.login')->with('success', config('loginx.messages.activationMailSent'));
+                return redirect()->route('login')->with('success', config('loginx.messages.activationMailSent'));
             }
         }
 
@@ -60,7 +60,7 @@ class MailActivationController extends Controller
             $user->save();
             $mailToken->is_used = true;
             $mailToken->save();
-            return redirect()->route('login.login')->with('success', config('loginx.messages.accountActivated'));
+            return redirect()->route('login')->with('success', config('loginx.messages.accountActivated'));
 
 
         }

@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('login.login') }}">
+<form method="POST" action="{{ route('login') }}">
     @csrf
     <div class="form-group mb-2">
         <div class="form-group">
@@ -7,7 +7,7 @@
                 <input type="text" class="form-control" id="user_input" name="user_input"
                        placeholder="Enter your email or username" autofocus @if(isset($data['inputText']))
                            value="{{$data['inputText']}}"
-                    @endif
+                    @endif"
                 >
                 @error('user_input')
                     <div class="error">{{ $message }}</div>
