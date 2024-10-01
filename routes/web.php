@@ -7,24 +7,13 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 //Login Routes
+Route::get('login', [LoginController::class, 'loginPage'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::controller(LoginController::class)
-    ->name('login.')
-    ->group(function () {
-        Route::get('login', 'loginPage')->name('login-page')->middleware('guest');
-        Route::post('login', 'login')->name('login')->middleware('guest');
-        Route::get('logout', 'logout')->name('logout');
-
-    });
-
-Route::controller(RegisterController::class)
-    ->middleware('guest')
-    ->name('register.')
-    ->group(function () {
-        Route::get('register', 'registerPage')->name('register-page');
-        Route::post('register', 'register')->name('register');
-
-    });
+//Register Routes
+Route::get('register', [RegisterController::class, 'registerPage'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
 
 Route::controller(ForgotPasswordController::class)
     ->middleware('guest')
