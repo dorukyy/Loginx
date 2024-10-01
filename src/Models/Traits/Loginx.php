@@ -14,6 +14,14 @@ use Illuminate\Support\Str;
 
 trait Loginx
 {
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->uuid = (string) Str::uuid();
+        });
+    }
+
     public function isBlocked(): bool
     {
         if ($this->blocked_at) {
