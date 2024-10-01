@@ -13,7 +13,7 @@
     @include('loginx::register._form')
     <div class="login-link">
         <span>Already have an account?</span>
-        <a href="{{route('login.login-page')}}">Login</a>
+        <a href="{{route('login')}}">Login</a>
     </div>
 </div>
 

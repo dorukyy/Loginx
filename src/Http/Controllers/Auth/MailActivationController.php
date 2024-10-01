@@ -66,7 +66,7 @@ class MailActivationController extends Controller
         }
         $view = view('loginx::login.show', ['data' => $activationSettings])
             ->withErrors(['activation' => 'Invalid token.']);
-        return redirect()->route('login.login-page')->withErrors(['loginx' => 'Invalid token.']);
+        return redirect()->route('login')->withErrors(['loginx' => 'Invalid token.']);
     }
 
 }

@@ -51,9 +51,9 @@ class LoginController extends Controller
     {
         if (auth()->check()) {
         LoginxFacade::logout();
-        return redirect()->route('login.login-page')->with('success', 'You have been logged out successfully');
+        return redirect()->route('login')->with('success', 'You have been logged out successfully');
         } else {
-            return redirect()->route('login.login-page')->withErrors(['loginx' => 'You are not logged in']);
+            return redirect()->route('login')->withErrors(['loginx' => 'You are not logged in']);
         }
 
 

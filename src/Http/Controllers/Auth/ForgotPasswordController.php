@@ -37,11 +37,11 @@ class ForgotPasswordController extends Controller
         $passwordResetToken = PasswordResetToken::where('token', $token)->first();
 
         if (!$user) {
-            return redirect()->route('login.login-page')->withErrors(['email' => 'This email is not found.']);
+            return redirect()->route('login')->withErrors(['email' => 'This email is not found.']);
         }
 
         if ($passwordResetToken == null || $passwordResetToken->user_id != $user->id) {
-            return redirect()->route('login.login-page')->withErrors(['token' => 'This token is invalid.']);
+            return redirect()->route('login.')->withErrors(['token' => 'This token is invalid.']);
         }
 
         return view('loginx::forgot-password.new-pass', ['token' => $token, 'email' => $email])->with('success', 'You can change your password now.');
@@ -58,7 +58,7 @@ class ForgotPasswordController extends Controller
             return redirect()->back()->withErrors(['loginx' => $data['message']]);
         }
         if ($data['status'] == 1) {
-            return redirect()->route('login.login-page')->with('success', 'Password has been changed.');
+            return redirect()->route('login')->with('success', 'Password has been changed.');
         }
 
     }
