@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loginx_roles', function (Blueprint $table) {
+        Schema::create('loginx_roles_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->foreignId('role_id');
+            $table->foreignId('permission_id');
             $table->timestamps();
-            $table->softDeletes();
         });
 
     }
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loginx_roles');
+        Schema::dropIfExists('loginx_roles_permissions');
 
     }
 };

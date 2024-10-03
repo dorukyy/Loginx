@@ -59,7 +59,7 @@ use dorukyy\loginx\Models\LoginxUser as LoginxUserModel;
 
 class User extends Authenticatable
 {
-    use LoginxReferral,Loginx,LoginxApiKey;;
+    use LoginxReferral,Loginx,LoginxApiKey;
 
 }
 
